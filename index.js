@@ -1,18 +1,5 @@
 const Discord = require("discord.js")
 const client = new Discord.Client()
-const fs = require("fs");
-
-client.comandos = new Discord.Collection()
-
-let archivos = fs.readdirSync("./comandos").filter((f) => f.endsWith(".js"))
-
-
-for(var archi of archivos) {
-    let comando = require("./comandos/"+archi)
-    client.comandos.set(comando.nombre, comando)
-    console.log(archi+" fue cargado correctamente.")
-}
-
 client.on('message', async message =>{
     let rol = message.guild.roles.cache.find(role => role.name === "Links")
     if(message.member.roles.cache.get(rol.id)) return;
